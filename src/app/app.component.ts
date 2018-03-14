@@ -29,17 +29,16 @@ export class AppComponent implements OnInit {
     this.http.get(this.flightsDataPath, {responseType: 'text'}).subscribe(csvData => {
 
       const separateLines = csvData.split('\n');
-
       separateLines.forEach(data => {
-        const noCommas = data.split(',');
-        if (noCommas[0] === 'uniqueid' || noCommas[0] === '') {
+        const noCommaRow = data.split(',');
+        if (noCommaRow[0] === 'uniqueid' || noCommaRow[0] === '') {
           console.log('omitting first or last row');
         } else {
         const properTypeRows: IFlight[] = [
-            { flightNumber: noCommas[1],
-            scheduledDate: new Date(parseInt(noCommas[2], 10)),
-            originDestination: noCommas[3],
-            registration: noCommas[4] }
+            { flightNumber: noCommaRow[1],
+            scheduledDate: new Date(parseInt(noCommaRow[2], 10)),
+            originDestination: noCommaRow[3],
+            registration: noCommaRow[4] }
         ];
         this.data.push(properTypeRows[0]);
       }});
@@ -48,5 +47,4 @@ export class AppComponent implements OnInit {
 }
 
 
-// public registrationsDataPath = 'assets/mock-data/mockRegistrations.csv';
-// private registrations: string[];
+

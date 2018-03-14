@@ -7,12 +7,22 @@
   </div>
   <div class="centre-frame">
     <div class="label">Registration</div>
-    <input (click)="inputClicked()" [ngClass]="{'blue-border': inputFocused == true}">
+    <input (click)="inputClicked()"
+           [ngClass]="{'blue-border': inputFocused == true}"
+           (change)="searchSimilar()"
+           [(ngModel)]="inputValue"
+    />
+    <div class="dropdown">
+      <ul>
+        <li class="li-header">REGISTRATION ({{filteredAmt}})</li>
+        <li *ngFor="let row of filteredRows">
+          {{row}}
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="buttons">
   <button class="cancel-btn">CANCEL</button>
   <button class="save-btn">SAVE</button>
   </div>
 </div>
-
-

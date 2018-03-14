@@ -6,6 +6,7 @@ import { ModalService} from "./services/modal.service";
 
 import { AppComponent } from "./app.component";
 import { RegistrationModalComponent } from "./components/registration-modal/registration-modal.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { RegistrationModalComponent } from "./components/registration-modal/regi
   imports: [
     BrowserModule,
     HttpClientModule,
-    DataGridModule
+    DataGridModule,
+    FormsModule
   ],
   providers: [ModalService],
   bootstrap: [AppComponent]
