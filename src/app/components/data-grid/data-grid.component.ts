@@ -13,6 +13,6 @@ import { IFlight } from "app/models/flight.interface";
 export class DataGridComponent {
   public sampleHeaders = ["flight", "sch. date", "sch.time", "o/d", "registration"];
 
-  @Input() public rows: Array<IFlight> = [];
+  @Input() public rows: Array<IFlight>;
 
 }

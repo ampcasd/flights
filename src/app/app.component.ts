@@ -1,6 +1,7 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { IFlight } from "app/models/flight.interface";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
+import { ModalService } from "./services/modal.service";
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -14,38 +15,38 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AppComponent implements OnInit {
   public data: Array<IFlight> = [];
-  //   {flightNumber: 'asd246',
-  //     scheduledDate: new Date(234212),
-  //     originDestination: 'asdfl',
-  //     registration: 'asdfs'}
-  // ];
-  public flightsDataPath = 'assets/mock-data/mockFlights.csv';
+
+  private flightsDataPath = 'assets/mock-data/mockFlights.csv';
+
 
   ngOnInit() {
     this.loadData();
+    console.log(this.modalService.modalVisible);
   }
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public modalService: ModalService) {}
 
   loadData() {
     this.http.get(this.flightsDataPath, {responseType: 'text'}).subscribe(csvData => {
 
-      let separateLines = csvData.split('\n');
-      // console.log(this.dataArray);
+      const separateLines = csvData.split('\n');
 
       separateLines.forEach(data => {
-        let noCommas = data.split(',');
-        if (noCommas[0] == 'uniqueid'){
-          console.log('omitting header row')
+        const noCommas = data.split(',');
+        if (noCommas[0] === 'uniqueid' || noCommas[0] === '') {
+          console.log('omitting first or last row');
         } else {
-        let rose: IFlight[] = [
+        const properTypeRows: IFlight[] = [
             { flightNumber: noCommas[1],
-            scheduledDate: new Date(parseInt(noCommas[2])),
+            scheduledDate: new Date(parseInt(noCommas[2], 10)),
             originDestination: noCommas[3],
-            registration: noCommas[0] }
+            registration: noCommas[4] }
         ];
-        this.data.push(rose[0]);
-        console.log()
+        this.data.push(properTypeRows[0]);
       }});
     });
   }
 }
+
+
+// public registrationsDataPath = 'assets/mock-data/mockRegistrations.csv';
+// private registrations: string[];
