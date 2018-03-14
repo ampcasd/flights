@@ -1,0 +1,9 @@
+<grid-header
+    [headers]="sampleHeaders"
+></grid-header>
+<div *ngIf="rows">
+    <data-row *ngFor="let row of rows"
+        [row]="row"
+    >
+    </data-row>
+</div>

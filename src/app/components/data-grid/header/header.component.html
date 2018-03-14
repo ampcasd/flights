@@ -1,0 +1,7 @@
+<div class="grid-header-container">
+    <div *ngFor="let header of headers;let first = first" class="header">
+        <div *ngIf="!first" class="divider"></div>
+        <p>{{header}}</p>
+    </div>
+</div>
+
