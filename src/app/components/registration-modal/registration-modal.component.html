@@ -1,28 +1,32 @@
 <div class="modal-background" (click)="hideModal()"></div>
 <div class="modal-window">
   <div class="header">
-    <div class="first-row">{{registrationId}} Registration</div>
+    <div class="first-row">{{clickedRegistrationId}} Registration</div>
     <div class="second-row">{{flightDate | date: "dd/MM/yy - hh:mm"}}</div>
-    <img id="exit-btn" src="../../../assets/images/cross.png" (click)="hideModal()">
+    <img id="exit-btn" class="link" src="../../../assets/images/cross.png" (click)="hideModal()">
   </div>
-  <div class="centre-frame">
+  <div class="white centre-frame">
     <div class="label">Registration</div>
-    <input (click)="inputClicked()"
-           [ngClass]="{'blue-border': inputFocused == true}"
-           (change)="searchSimilar()"
+    <input (click)="inputFocused=true"
            [(ngModel)]="inputValue"
+           [ngClass]="{'blue-border': inputFocused}"
+           (ngModelChange)="searchSimilar()"
+           (blur)="inputFocused=false"
+           value="clickedRegistrationId"
     />
-    <div class="dropdown">
+    <div class="white dropdown" *ngIf="inputFocused && inputValue.length>1" (click)="dropdownClick=true;">
       <ul>
-        <li class="li-header">REGISTRATION ({{filteredAmt}})</li>
-        <li *ngFor="let row of filteredRows">
+        <li class="li-header">REGISTRATIONS
+          <span class="not-bold">({{filteredRegistrations.length}})</span>
+        </li>
+        <li class="li-item link" *ngFor="let row of filteredRegistrations" (mousedown)="inputValue=row">
           {{row}}
         </li>
       </ul>
     </div>
   </div>
   <div class="buttons">
-  <button class="cancel-btn">CANCEL</button>
-  <button class="save-btn">SAVE</button>
+  <button class="white cancel-btn link" (click)="hideModal()">CANCEL</button>
+  <button class="save-btn link" (click)="modalService.saveValue(inputValue)">SAVE</button>
   </div>
 </div>

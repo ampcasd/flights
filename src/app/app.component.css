@@ -1,0 +1,9 @@
+.white {
+  background-color: white;
+}
+.link {
+  cursor: pointer;
+}
+.not-bold {
+  font-weight: 400;
+}

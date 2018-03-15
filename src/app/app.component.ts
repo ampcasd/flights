@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    console.log(this.modalService.modalVisible);
   }
   constructor(private http: HttpClient, public modalService: ModalService) {}
 
