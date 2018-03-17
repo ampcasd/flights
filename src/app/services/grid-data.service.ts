@@ -12,12 +12,10 @@ export class GridDataService {
 
   public loadData() {
     this.http.get(this.flightsDataPath, {responseType: 'text'}).subscribe(csvData => {
-
       // creating an array of rows
       const separateLines = csvData.split('\n');
       // looping through rows to push correct types and values
       separateLines.forEach(data => {
-
         const noCommaRow = data.split(',');
 
         // omitting first and last row with if statement

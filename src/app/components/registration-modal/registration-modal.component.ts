@@ -1,7 +1,7 @@
-import {Component, OnInit, HostListener, ViewEncapsulation} from '@angular/core';
-import { ModalService } from '../../services/modal.service';
-import { HttpClient } from '@angular/common/http';
-import {DomSanitizer} from "@angular/platform-browser";
+import {Component, OnInit, HostListener, ViewEncapsulation, ViewChild} from '@angular/core';
+import {ModalService} from '../../services/modal.service';
+import {HttpClient} from '@angular/common/http';
+import {DropdownComponent} from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-registration-modal',
@@ -11,12 +11,11 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 
 export class RegistrationModalComponent implements OnInit {
-  private allRegistrations = [];
-  public selectedFlight = this.modalService.selectedFlight;
+  @ViewChild('dropdownComponent') dropdownComponent: DropdownComponent;
+
+  public allRegistrations = [];
   public flightDate = this.modalService.flightDate;
   public inputFocused = false;
-  public inputValue = this.selectedFlight;
-  public filteredRegistrations = [];
   public registrationsDataPath = 'assets/mock-data/mockRegistrations.csv';
   public escapeKeyCode = 27;
 
@@ -28,8 +27,8 @@ export class RegistrationModalComponent implements OnInit {
   }
 
   constructor(public modalService: ModalService,
-              private http: HttpClient,
-              private domSanitizer: DomSanitizer) { }
+              private http: HttpClient) {
+  }
 
   ngOnInit() {
     this.loadData();
@@ -44,41 +43,14 @@ export class RegistrationModalComponent implements OnInit {
     });
   }
 
-  searchSimilar() {
-    // selectedFlight cleared in order to trigger searching
-    // which is blocked by default in case registrationId is already set
-    this.selectedFlight = '';
-    this.filteredRegistrations = this.allRegistrations.filter(row => {
-      return row.indexOf(this.inputValue.toUpperCase()) === 0;
-    });
-  }
-  boldify(row: string) {
-    const value = row.replace(this.inputValue, '<span style="font-weight: bold">' + this.inputValue + '</span>');
-    return this.domSanitizer.bypassSecurityTrustHtml(value);
-  }
+
   cancelModal() {
     this.modalService.inputValue.next(null);
     this.modalService.modalVisible = false;
   }
+
   save() {
-    this.modalService.inputValue.next(this.inputValue);
+    this.modalService.inputValue.next(this.dropdownComponent.value);
     this.modalService.modalVisible = false;
   }
 }
-
-
-  // loadData() {
-  //   if (this.modalService.allRegistrations.length <= 1) {
-  //   this.http.get(this.registrationsDataPath, {responseType: 'text'}).subscribe(csvData => {
-  //     const separateLines = csvData.split('\n');
-  //     separateLines.forEach(data => {
-  //       this.modalService.allRegistrations.push(data);
-  //     });
-  //     console.log('done');
-  //   });
-  // }}
-
-  // searchSimilar() {
-  //   // this.modalService.query = this.inputVal;
-  //   this.modalService.searchSimilar();
-  // }

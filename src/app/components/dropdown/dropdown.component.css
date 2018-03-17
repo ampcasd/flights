@@ -1,7 +1,8 @@
 .dropdown {
   position: absolute;
-  overflow-y: scroll;
-  height: 289px;
+  overflow-y: auto;
+  height: auto;
+  max-height: 290px;
   width: 301px;
   margin-left: 25px;
   border: 2px solid #18abf4;
@@ -14,8 +15,9 @@
   font-weight: 900;
 }
 .li-item {
-  font-size: 13px;
-  padding: 12px 0 12px 6px;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 11px 0 11px 6px;
   border-bottom: solid 1px #d8d8d8;
 }
 .li-item:hover {

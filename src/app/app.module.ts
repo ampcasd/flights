@@ -8,7 +8,7 @@ import { RegistrationModalComponent } from "./components/registration-modal/regi
 import { FormsModule } from "@angular/forms";
 import { GridDataService } from "./services/grid-data.service";
 import { ModalService} from "./services/modal.service";
-import { DropdownComponent } from "./components/registration-modal/dropdown/dropdown.component";
+import { DropdownComponent } from "./components/dropdown/dropdown.component";
 import { BoldifyPipe } from "./boldify.pipe";
 
 

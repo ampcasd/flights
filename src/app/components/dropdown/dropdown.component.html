@@ -1,0 +1,18 @@
+<div class="label">Registration</div>
+<input [(ngModel)]="inputValue"
+       (ngModelChange)="searchSimilar()"
+       (focus)="inputFocused = true"
+       (blur)="inputFocused = false"
+       [ngClass]="{'blue-border': inputFocused}"
+       autofocus />
+
+<div class="white dropdown" *ngIf="inputFocused && inputValue.length>1 && !selectedFlight">
+  <ul>
+    <li class="li-header">REGISTRATIONS
+      <span class="not-bold">({{filteredRegistrations.length}})</span>
+    </li>
+    <li class="li-item link" *ngFor="let row of filteredRegistrations" (mousedown)="inputValue=row">
+      <div [innerHTML]="boldify(row)"></div>
+    </li>
+  </ul>
+</div>
