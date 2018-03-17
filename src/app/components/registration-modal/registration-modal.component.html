@@ -1,32 +1,35 @@
-<div class="modal-background" (click)="hideModal()"></div>
+<div class="modal-background" (click)="cancelModal()"></div>
 <div class="modal-window">
   <div class="header">
-    <div class="first-row">{{clickedRegistrationId}} Registration</div>
+    <div class="first-row">{{selectedFlight}} Registration</div>
     <div class="second-row">{{flightDate | date: "dd/MM/yy - hh:mm"}}</div>
-    <img id="exit-btn" class="link" src="../../../assets/images/cross.png" (click)="hideModal()">
+    <img id="exit-btn" class="link" src="../../../assets/images/cross.png" (click)="cancelModal()">
   </div>
   <div class="white centre-frame">
     <div class="label">Registration</div>
-    <input (click)="inputFocused=true"
-           [(ngModel)]="inputValue"
-           [ngClass]="{'blue-border': inputFocused}"
+
+    <input [(ngModel)]="inputValue"
            (ngModelChange)="searchSimilar()"
-           (blur)="inputFocused=false"
-           value="clickedRegistrationId"
+           (focus)="inputFocused = true"
+           (blur)="inputFocused = false"
+           [ngClass]="{'blue-border': inputFocused}"
+           autofocus
     />
-    <div class="white dropdown" *ngIf="inputFocused && inputValue.length>1" (click)="dropdownClick=true;">
+
+    <div class="white dropdown" *ngIf="inputFocused && inputValue.length>1 && !selectedFlight">
       <ul>
         <li class="li-header">REGISTRATIONS
           <span class="not-bold">({{filteredRegistrations.length}})</span>
         </li>
         <li class="li-item link" *ngFor="let row of filteredRegistrations" (mousedown)="inputValue=row">
-          {{row}}
+          <div [innerHTML]="boldify(row)"></div>
         </li>
       </ul>
     </div>
+
   </div>
-  <div class="buttons">
-  <button class="white cancel-btn link" (click)="hideModal()">CANCEL</button>
-  <button class="save-btn link" (click)="modalService.saveValue(inputValue)">SAVE</button>
+  <div class="buttons-wrapper">
+  <button class="white cancel-btn link" (click)="cancelModal()">CANCEL</button>
+  <button class="save-btn link" (click)="save()">SAVE</button>
   </div>
 </div>

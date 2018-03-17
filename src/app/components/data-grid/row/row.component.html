@@ -12,11 +12,9 @@
       <p>{{row.originDestination}}</p>
   </div>
   <div class="row-cell">
-    <p *ngIf="modalService.newValue.length>1"
-       (click)="showModal(row.registration, row.scheduledDate)">{{modalService.newValue}}</p>
-    <p *ngIf="modalService.newValue.length==0 && row.registration === '' || row.registration === null"
+    <p *ngIf="row.registration === '' || row.registration === null"
        (click)="showModal(row.registration, row.scheduledDate)">...........</p>
-    <p *ngIf="row.registration !== '' && row.registration !== null && modalService.newValue.length==0"
+    <p *ngIf="row.registration !== '' && row.registration !== null"
        (click)="showModal(row.registration, row.scheduledDate)">{{row.registration}}</p>
   </div>
 </div>

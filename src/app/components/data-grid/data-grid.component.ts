@@ -14,5 +14,4 @@ export class DataGridComponent {
   public sampleHeaders = ["flight", "sch. date", "sch.time", "o/d", "registration"];
 
   @Input() public rows: Array<IFlight>;
-
 }

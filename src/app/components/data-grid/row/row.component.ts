@@ -1,6 +1,6 @@
 import {
   Component,
-  Input, OnInit
+  Input
 } from '@angular/core';
 import { IFlight } from 'app/models/flight.interface';
 import { ModalService } from '../../../services/modal.service';
@@ -11,23 +11,30 @@ import { ModalService } from '../../../services/modal.service';
   styleUrls: ['./row.component.css'],
 })
 
-export class RowComponent implements OnInit{
+export class RowComponent {
+  public selected = false;
   @Input() row: IFlight;
 
-  // public newValue = this.modalService.newValue;
-
-  constructor(public modalService: ModalService) {}
-
-  ngOnInit() {
-    if (this.modalService.newValue) {
-      this.row.registration = this.modalService.newValue;
-    }
+  constructor(public modalService: ModalService) {
+    this.modalService.newRegistrationId.subscribe(
+      (data) => {
+        if (data == null) {
+          this.selected = false;
+        } else if (this.selected) {
+          this.row.registration = data;
+          this.selected = false;
+        }
+      });
   }
 
-
   showModal(registrationId, flightDate) {
+    this.selected = true;
     this.modalService.modalVisible = true;
-    this.modalService.registrationId = registrationId;
     this.modalService.flightDate = flightDate;
+    if (registrationId === null) {
+      this.modalService.selectedFlight = '';
+    } else {
+      this.modalService.selectedFlight = registrationId;
+    }
   }
 }

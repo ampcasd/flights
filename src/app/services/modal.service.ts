@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import { Observable } from "rxjs/Observable";
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 
 export class ModalService {
   public modalVisible = false;
-  public registrationId: string;
+  public selectedFlight: string;
   public flightDate: string;
-  public newValue = '';
-  // public newRegistrationId: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public inputValue = new Subject<string>();
+  public allRegistrations = [];
+  public newRegistrationId = this.inputValue.asObservable();
+  public filteredRegistrations = [];
+  public query = '';
 
-  saveValue(value) {
-    this.newValue = value;
-    console.log("registrationId = " + this.registrationId);
-    console.log("newRegistrationId = " + this.newValue);
+  searchSimilar() {
+    this.filteredRegistrations = this.allRegistrations.filter(row => {
+      // console.log(this.query);
+      return row.indexOf(this.query) === 0;
+    });
   }
+
 }

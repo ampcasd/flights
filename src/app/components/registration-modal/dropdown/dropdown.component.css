@@ -1,0 +1,23 @@
+.dropdown {
+  position: absolute;
+  overflow-y: scroll;
+  height: 289px;
+  width: 301px;
+  margin-left: 25px;
+  border: 2px solid #18abf4;
+  top: 136px;
+}
+.li-header {
+  font-size: 12px;
+  padding: 7px 0 13px 6px;
+  background-color: #f0f0f0;
+  font-weight: 900;
+}
+.li-item {
+  font-size: 13px;
+  padding: 12px 0 12px 6px;
+  border-bottom: solid 1px #d8d8d8;
+}
+.li-item:hover {
+  background-color: rgba(240, 240, 240, 0.5);
+}
