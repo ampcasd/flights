@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-weight: 400;
+    font-style: normal;
+  /*src: url('../fonts/Source-Sans-Pro-regular/Source-Sans-Pro-regular.eot');
+  src: url('../fonts/Source-Sans-Pro-regular/Source-Sans-Pro-regular.eot?#iefix') format('embedded-opentype'),
+       local('Source Sans Pro'),
+       local('Source-Sans-Pro-regular'),
+       url('../fonts/Source-Sans-Pro-regular/Source-Sans-Pro-regular.woff2') format('woff2'),
+       
+       url('../fonts/Source-Sans-Pro-regular/Source-Sans-Pro-regular.ttf') format('truetype'),
+       url('../fonts/Source-Sans-Pro-regular/Source-Sans-Pro-regular.svg#SourceSansPro') format('svg');*/
+
+    /* TODO (AH): Find out what was intended here. For now use WOFF as it can be used in all supported browsers.
+                  Webpack was only picking up the first URL reference, and we wouldn't want multiple formats to
+                  be included in the bundle. If we're going to use multiple font formats they should be
+                  in external files.
+    */
+    src: url('../fonts/Source-Sans-Pro-regular/Source-Sans-Pro-regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-weight: 600;
+    font-style: normal;
+    src: url('../fonts/SourceSansPro-Semibold.ttf.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-weight: 700;
+    font-style: normal;
+    src: url('../fonts/SourceSansPro-Bold.ttf.woff') format('woff');
+}
+
+body, input {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
