@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, Input} from '@angular/core';
-import {ModalService} from '../../services/modal.service';
-import {DomSanitizer} from "@angular/platform-browser";
+import { Component, Input } from '@angular/core';
+import { ModalService } from '../../services/modal.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'registration-search',
@@ -8,11 +8,12 @@ import {DomSanitizer} from "@angular/platform-browser";
   styleUrls: ['./dropdown.component.css']
 })
 
-export class DropdownComponent implements AfterViewInit {
+export class DropdownComponent {
   @Input() values: string[];
   public filteredRegistrations = [];
   public selectedFlight = this.modalService.selectedFlight;
   public inputValue = this.selectedFlight;
+  public inputFocused;
 
   public get value(): string {
     return this.inputValue;
@@ -29,7 +30,7 @@ export class DropdownComponent implements AfterViewInit {
 
   /**
    * selectedFlight cleared in order to trigger searching
-   * which is blocked by default in case registrationId is already set
+   * which is blocked by default to prevent displaying dropdown with just one ID that was already set
    */
   searchSimilar() {
     this.selectedFlight = '';

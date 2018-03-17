@@ -9,5 +9,4 @@ export class ModalService {
   public flightDate: string;
   public inputValue = new Subject<string>();
   public newRegistrationId = this.inputValue.asObservable();
-
 }

@@ -1,7 +1,7 @@
-import {Component, OnInit, HostListener, ViewEncapsulation, ViewChild} from '@angular/core';
-import {ModalService} from '../../services/modal.service';
-import {HttpClient} from '@angular/common/http';
-import {DropdownComponent} from '../dropdown/dropdown.component';
+import { Component, OnInit, HostListener, ViewEncapsulation, ViewChild } from '@angular/core';
+import { ModalService } from '../../services/modal.service';
+import { HttpClient } from '@angular/common/http';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-registration-modal',
@@ -15,9 +15,9 @@ export class RegistrationModalComponent implements OnInit {
 
   public allRegistrations = [];
   public flightDate = this.modalService.flightDate;
-  public inputFocused = false;
   public registrationsDataPath = 'assets/mock-data/mockRegistrations.csv';
   public escapeKeyCode = 27;
+  public selectedFlight = this.modalService.selectedFlight;
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -42,7 +42,6 @@ export class RegistrationModalComponent implements OnInit {
       });
     });
   }
-
 
   cancelModal() {
     this.modalService.inputValue.next(null);

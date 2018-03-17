@@ -11,7 +11,7 @@
   <div class="row-cell">
       <p>{{row.originDestination}}</p>
   </div>
-  <div class="row-cell">
+  <div class="row-cell link">
     <p *ngIf="row.registration === '' || row.registration === null"
        (click)="showModal(row.registration, row.scheduledDate)">...........</p>
     <p *ngIf="row.registration !== '' && row.registration !== null"
