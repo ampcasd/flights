@@ -3,7 +3,7 @@
   <div class="header">
     <div class="first-row">{{selectedFlight}} Registration</div>
     <div class="second-row">{{flightDate | date: "dd/MM/yy - hh:mm"}}</div>
-    <img id="exit-btn" class="link" src="../../../assets/images/cross.png" (click)="cancelModal()">
+    <img id="exit-btn" class="link" src="assets/images/cross.png" (click)="cancelModal()">
   </div>
   <div class="white centre-frame">
     <registration-search #dropdownComponent [values]="allRegistrations"></registration-search>
